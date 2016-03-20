@@ -9,6 +9,7 @@ def customerInfoView(request):
 
     if request.method == "GET":
         pass
+
     elif request.method == "POST":
         cid = request.POST['customerId']
 
@@ -22,6 +23,6 @@ def customerInfoView(request):
 
         customer.save()
 
+    context = {"value": "Hello, sir!"}
 
-
-    return HttpResponse("OK")
+    return render(request, "index.html", context)
