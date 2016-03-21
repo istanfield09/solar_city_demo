@@ -2,7 +2,11 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core import serializers
 
-from django.forms.models  import model_to_dict
+import datetime
+
+from models import Customer
+
+import json
 # Create your views here.
 
 def customerInfoView(request):
@@ -11,18 +15,14 @@ def customerInfoView(request):
         pass
 
     elif request.method == "POST":
-        cid = request.POST['customerId']
+        customerData = json.loads(request.body)['customer']
+        print customerData
 
-        customer = customerData()
-        fieldDict = model_to_dict(customer)
-
-        for field in fieldDict:
-            if field in request.POST:
-                inputValue = request.POST[field]
-                setCustomerField(customer, field, inputValue)
-
+        customer = Customer.objects.create_customer(customerData)
         customer.save()
 
-    context = {"value": "Hello, sir!"}
+        print customerData
+
+    context = {"stuff": "more stuff"}
 
     return render(request, "index.html", context)
