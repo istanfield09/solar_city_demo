@@ -10,7 +10,10 @@ customerApp.controller('CustomerFormController',
 						method: "POST",
 						url: "",
 						data: { customer }
+						}).success(function (data) {
+							console.log("Success!");
 					});
+
 				}
 		}
 );
